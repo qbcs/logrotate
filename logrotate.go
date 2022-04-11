@@ -69,9 +69,9 @@ func New(logPath string, rotateType Type) (io.Writer, error) {
 // NewMust 创建一个能自动进行日志切割的io.Writer实例，遇到失败返回os.Stderr
 func NewMust(logPath string, rotateType Type) io.Writer {
 	if file, err := New(logPath, rotateType); err == nil {
-		fmt.Fprintf(os.Stderr, "logrotate.New fails, use stderr instead. err: %v", err)
 		return file
 	}
+	fmt.Fprintf(os.Stderr, "logrotate.New fails, use stderr instead. err: %v", err)
 	return os.Stderr
 }
 
